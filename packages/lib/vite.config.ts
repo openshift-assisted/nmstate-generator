@@ -19,7 +19,15 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['react', 'react-dom'],
+      external: [
+        'react',
+        'react-dom',
+        '@patternfly/react-core',
+        '@patternfly/react-icons',
+        '@patternfly/react-table',
+        '@patternfly/react-code-editor',
+        'react-monaco-editor',
+      ],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps

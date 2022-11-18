@@ -22,14 +22,26 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@patternfly/react-code-editor": "^4.82.55",
+    "@patternfly/react-core": "^4.250.1",
+    "@patternfly/react-icons": "^4.92.10",
+    "@patternfly/react-table": "^4.111.33",
+    "@types/js-yaml": "^4.0.5",
+    "@types/lodash": "^4.14.189",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
     "pathe": "^1.0.0",
+    "react-monaco-editor": "^0.50.1",
     "rollup": "^3.3.0",
     "typescript": "^4.6.4",
     "vite": "^3.2.3",
