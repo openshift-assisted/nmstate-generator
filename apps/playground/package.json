@@ -15,6 +15,8 @@
     "@patternfly/react-core": "^4.250.1",
     "@patternfly/react-icons": "^4.92.10",
     "@patternfly/react-table": "^4.111.33",
+    "formik": "^2.2.9",
+    "monaco-editor": "^0.34.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-monaco-editor": "^0.50.1"

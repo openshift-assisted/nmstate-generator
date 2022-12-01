@@ -1,5 +1,5 @@
 import React from 'react';
-import { NMStateConfigDetail, NMStateYamlCodePanel } from '@nmstate-ui/lib';
+import { NMStateConfig, NMStateConfigDetail, NMStateYamlCodePanel } from '@nmstate-ui/lib';
 import {
   Page,
   PageSection,
@@ -17,15 +17,9 @@ import {
   DrawerPanelContent,
   DrawerColorVariant,
   TabsProps,
-  Button,
-  Toolbar,
-  DrawerSection,
-  ToolbarContent,
-  EmptyState,
 } from '@patternfly/react-core';
 import NetworkIcon from '@patternfly/react-icons/dist/esm/icons/network-icon';
 import ClusterIcon from '@patternfly/react-icons/dist/esm/icons/cluster-icon';
-import PlusIcon from '@patternfly/react-icons/dist/esm/icons/plus-icon';
 import { nmstateConfigs as nmstateConfigsData, emptyNMStateConfig } from './mocks/NMStateData';
 
 function App() {
@@ -45,6 +39,12 @@ function App() {
     setActiveTabKey(
       updatedNMStateConfigs.length === 0 ? 'globalSettings' : updatedNMStateConfigs.length - 1
     );
+  };
+
+  const handleNMStateConfigUpdate = (index: number, nmstateConfig: NMStateConfig) => {
+    const updated = [...nmstateConfigs];
+    updated.splice(index, 1, nmstateConfig);
+    setNMStateConfigs(updated);
   };
 
   return (
@@ -97,25 +97,28 @@ function App() {
           <DrawerContent
             colorVariant={DrawerColorVariant.light200}
             panelContent={
-              <DrawerPanelContent isResizable defaultSize={'600px'} minSize={'150px'} hasNoBorder>
+              <DrawerPanelContent defaultSize={'600px'} minSize={'150px'} hasNoBorder isResizable>
                 {activeTabKey === 'globalSettings' && <>global settings code goes here</>}
                 {typeof activeTabKey === 'number' && (
-                  <NMStateYamlCodePanel nmstateConfig={nmstateConfigs[activeTabKey]} />
+                  <NMStateYamlCodePanel
+                    nmstateConfig={nmstateConfigs[activeTabKey]}
+                    updateNMStateConfig={(nmstateConfig) =>
+                      handleNMStateConfigUpdate(activeTabKey, nmstateConfig)
+                    }
+                  />
                 )}
               </DrawerPanelContent>
             }
           >
-            <DrawerSection colorVariant={DrawerColorVariant.light200}>
-              <Toolbar style={{ backgroundColor: 'transparent', paddingBottom: '0' }} usePageInsets>
-                <ToolbarContent>
-                  <Button icon={<PlusIcon />}>Add Interface</Button>
-                </ToolbarContent>
-              </Toolbar>
-            </DrawerSection>
             <DrawerContentBody hasPadding>
               {activeTabKey === 'globalSettings' && <>global settings form goes here</>}
               {typeof activeTabKey === 'number' && (
-                <NMStateConfigDetail nmstateConfig={nmstateConfigs[activeTabKey]} />
+                <NMStateConfigDetail
+                  nmstateConfig={nmstateConfigs[activeTabKey]}
+                  updateNMStateConfig={(nmstateConfig) =>
+                    handleNMStateConfigUpdate(activeTabKey, nmstateConfig)
+                  }
+                />
               )}
             </DrawerContentBody>
           </DrawerContent>

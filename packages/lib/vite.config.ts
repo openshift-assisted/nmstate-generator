@@ -14,6 +14,7 @@ export default defineConfig({
       name: 'NMState utilites library',
       // the proper extensions will be added
       fileName: 'nmstate-ui-lib',
+      formats: ['es'],
     },
     watch: watcherOptions,
     rollupOptions: {
@@ -27,6 +28,7 @@ export default defineConfig({
         '@patternfly/react-table',
         '@patternfly/react-code-editor',
         'react-monaco-editor',
+        'formik',
       ],
       output: {
         // Provide global variables to use in the UMD build

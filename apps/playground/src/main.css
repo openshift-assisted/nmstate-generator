@@ -2,3 +2,8 @@
   height: 100%;
   box-sizing: border-box;
 }
+
+/* override patterfly checkbox body so it stretches to the remaining width */
+.pf-c-check {
+  justify-items: stretch;
+}

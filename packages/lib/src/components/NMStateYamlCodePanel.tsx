@@ -1,18 +1,24 @@
 import { CodeEditor, CodeEditorProps, Language } from '@patternfly/react-code-editor';
 import { ChangeHandler } from 'react-monaco-editor';
 import { NMStateConfig } from '../types';
-import { dump } from 'js-yaml';
+import { dump, load } from 'js-yaml';
 import MonacoEditor from 'react-monaco-editor';
 
-type CodePanelProps = {
+type NMStateYamlCodePanelProps = {
   nmstateConfig: NMStateConfig;
+  updateNMStateConfig: (nmstateConfig: NMStateConfig) => void;
 };
 
-function NMStateYamlCodePanel({ nmstateConfig }: CodePanelProps) {
+function NMStateYamlCodePanel({ nmstateConfig, updateNMStateConfig }: NMStateYamlCodePanelProps) {
   const code = dump(nmstateConfig);
 
-  const onChange: ChangeHandler = (value, event) => {
-    console.log('changed', value, event);
+  const handleChange: ChangeHandler = (value) => {
+    try {
+      const updatedConfig = load(value) as NMStateConfig;
+      updateNMStateConfig(updatedConfig);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -23,10 +29,10 @@ function NMStateYamlCodePanel({ nmstateConfig }: CodePanelProps) {
     //   isMinimapVisible={true}
     //   isLanguageLabelVisible
     //   code={code}
-    //   onChange={onChange}
+    //   onChange={handleChange}
     //   language={Language.yaml}
     //   isCopyEnabled
-    //   // height="sizeToFit"
+    //   height="sizeToFit"
     //   options={{
     //     automaticLayout: true,
     //     scrollBeyondLastLine: false,
@@ -39,7 +45,8 @@ function NMStateYamlCodePanel({ nmstateConfig }: CodePanelProps) {
         automaticLayout: true,
         scrollBeyondLastLine: false,
       }}
-      language="javascript"
+      onChange={handleChange}
+      language="yaml"
       theme="vs-dark"
       value={code}
     />

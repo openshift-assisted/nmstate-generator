@@ -40,6 +40,7 @@
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
+    "formik": "^2.2.9",
     "pathe": "^1.0.0",
     "react-monaco-editor": "^0.50.1",
     "rollup": "^3.3.0",

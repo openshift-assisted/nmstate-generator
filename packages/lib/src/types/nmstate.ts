@@ -11,12 +11,12 @@ export type Address = {
 // https://nmstate.io/devel/api.html#interfaceip
 export type InterfaceIPConfig = {
   enabled: boolean;
-  dhcp: boolean;
+  dhcp?: boolean;
   'auto-dns'?: boolean;
   'auto-gateway'?: boolean;
   'auto-routes'?: boolean;
-  'auto-route-table-id'?: number;
-  address: Address[];
+  'auto-route-table-id'?: string;
+  address?: Address[];
 };
 
 export type InterfaceIPv4Config = InterfaceIPConfig;
@@ -41,6 +41,8 @@ export type NMStateDNSResolver = {
 export enum NMStateInterfaceType {
   ETHERNET = 'ethernet',
   VLAN = 'vlan',
+  BOND = 'bond',
+  OVS_BRIDGE = 'ovs-bridge',
 }
 
 export enum InterfaceState {
@@ -51,7 +53,7 @@ export enum InterfaceState {
 
 export type NMStateInterface = {
   name: string;
-  type: string;
+  type: NMStateInterfaceType;
   state: InterfaceState;
   mtu?: number;
   'mac-address': string;

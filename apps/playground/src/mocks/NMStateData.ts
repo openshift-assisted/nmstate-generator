@@ -1,4 +1,5 @@
 import { NMStateConfig, camelKeys, InterfaceState } from '@nmstate-ui/lib';
+import { NMStateInterface } from '@nmstate-ui/lib/dist/types/nmstate';
 
 export const emptyNMStateConfig: NMStateConfig = {
   interfaces: [],
