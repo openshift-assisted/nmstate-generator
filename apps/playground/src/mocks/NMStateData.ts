@@ -1,5 +1,4 @@
-import { NMStateConfig, camelKeys, InterfaceState } from '@nmstate-ui/lib';
-import { NMStateInterface } from '@nmstate-ui/lib/dist/types/nmstate';
+import { InterfaceState, NMStateConfig, NMStateInterfaceType } from '@nmstate-ui/lib';
 
 export const emptyNMStateConfig: NMStateConfig = {
   interfaces: [],
@@ -9,7 +8,7 @@ export const nmstateConfig1: NMStateConfig = {
   interfaces: [
     {
       name: 'eth0',
-      type: 'ethernet',
+      type: NMStateInterfaceType.ETHERNET,
       state: InterfaceState.UP,
       'mac-address': '02:00:00:80:12:14',
       ipv4: {
@@ -25,7 +24,7 @@ export const nmstateConfig1: NMStateConfig = {
     },
     {
       name: 'eth1',
-      type: 'ethernet',
+      type: NMStateInterfaceType.ETHERNET,
       state: InterfaceState.UP,
       'mac-address': '02:00:00:80:12:15',
       ipv4: {
