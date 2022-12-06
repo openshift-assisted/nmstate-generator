@@ -1,4 +1,4 @@
-import { NMStateInterfaceType } from '../types';
+import { Address, NMStateInterfaceType } from '../types';
 
 export const getInterfaceTypeLabel = (interfaceType: NMStateInterfaceType) => {
   switch (interfaceType) {
@@ -12,3 +12,5 @@ export const getInterfaceTypeLabel = (interfaceType: NMStateInterfaceType) => {
       return 'OVS Bridge';
   }
 };
+
+export const newAddress: Address = { ip: '', 'prefix-length': 24 };

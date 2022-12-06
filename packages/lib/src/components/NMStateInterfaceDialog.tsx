@@ -17,16 +17,16 @@ import {
 import IPv4Fields from './formInputs/IPv4Fields';
 import MACAddressInputField from './formInputs/MACAddressInputField';
 import NameInputField from './formInputs/NameInputField';
-import { getInterfaceTypeLabel } from './utils';
+import { getInterfaceTypeLabel, newAddress } from './utils';
 
-const getIPv4InitialValues = (ipv4?: InterfaceIPv4Config) => ({
+const getIPv4InitialValues = (ipv4?: InterfaceIPv4Config): InterfaceIPv4Config => ({
   enabled: ipv4?.enabled || true,
   dhcp: ipv4?.dhcp || false,
   'auto-dns': ipv4?.['auto-dns'] || false,
   'auto-gateway': ipv4?.['auto-gateway'] || false,
   'auto-routes': ipv4?.['auto-routes'] || false,
   'auto-route-table-id': ipv4?.['auto-route-table-id'] || '',
-  address: (ipv4?.address || []).map((address) => ({
+  address: (ipv4?.address || [newAddress]).map((address) => ({
     ip: address.ip || '',
     'prefix-length': address['prefix-length'] || 24,
   })),
