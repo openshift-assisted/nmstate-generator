@@ -5,12 +5,9 @@ import {
   Flex,
   FlexItem,
   FormGroup,
-  NumberInput,
-  NumberInputProps,
   Radio,
   RadioProps,
   Stack,
-  TextInput,
 } from '@patternfly/react-core';
 import PlusIcon from '@patternfly/react-icons/dist/esm/icons/plus-icon';
 import TrashIcon from '@patternfly/react-icons/dist/esm/icons/trash-icon';
@@ -18,81 +15,9 @@ import { FieldArray, useField, useFormikContext } from 'formik';
 import React from 'react';
 import { InterfaceIPv4Config } from '../../types/nmstate';
 import { newAddress } from '../utils';
-
-type BaseInputFieldProps = {
-  name: string;
-  label: string;
-  isRequired?: boolean;
-};
-
-type TextInputFieldProps = BaseInputFieldProps;
-
-function TextInputField({ name, label, isRequired = false }: TextInputFieldProps) {
-  const [field, meta, helpers] = useField<string>(name);
-  const fieldId = `${name}-input-field`;
-  return (
-    <FormGroup label={label} fieldId={fieldId} isRequired>
-      <TextInput
-        type="text"
-        id={fieldId}
-        {...field}
-        onChange={(value, event) => field.onChange(event)}
-        isRequired={isRequired}
-      />
-    </FormGroup>
-  );
-}
-
-type NumberInputFieldProps = BaseInputFieldProps & NumberInputProps;
-
-function NumberInputField({ name, label, isRequired = false, ...props }: NumberInputFieldProps) {
-  const [field, meta, helpers] = useField<number>(name);
-  const fieldId = `${name}-input-field`;
-  const onPlus: NumberInputProps['onPlus'] = (event) => helpers.setValue(field.value + 1);
-  const onMinus: NumberInputProps['onMinus'] = (event) => helpers.setValue(field.value - 1);
-  return (
-    <FormGroup label={label} fieldId={fieldId} isRequired>
-      <NumberInput
-        {...field}
-        onMinus={onMinus}
-        onPlus={onPlus}
-        inputName={name}
-        inputAriaLabel="number input"
-        minusBtnAriaLabel="minus"
-        plusBtnAriaLabel="plus"
-        id={fieldId}
-        onChange={field.onChange}
-        required={isRequired}
-        {...props}
-      />
-    </FormGroup>
-  );
-}
-
-type BooleanCheckboxFieldProps = BaseInputFieldProps & { children?: React.ReactNode };
-
-function BooleanCheckboxField({
-  name,
-  label,
-  isRequired = false,
-  children,
-}: BooleanCheckboxFieldProps) {
-  const [field, meta, helpers] = useField(name);
-  const fieldId = `${name}-input-field`;
-  return (
-    <FormGroup fieldId={fieldId} isRequired>
-      <Checkbox
-        id={fieldId}
-        label={label}
-        {...field}
-        isChecked={field.value}
-        onChange={(checked, event) => helpers.setValue(checked)}
-        body={children}
-        isRequired={isRequired}
-      />
-    </FormGroup>
-  );
-}
+import BooleanCheckboxField from './BooleanCheckboxField';
+import NumberInputField from './NumberInputField';
+import TextInputField from './TextInputField';
 
 function IPv4Checkbox({ children }: { children: React.ReactNode }) {
   const [field, meta, helpers] = useField('ipv4');

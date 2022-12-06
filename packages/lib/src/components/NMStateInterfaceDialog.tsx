@@ -16,7 +16,7 @@ import {
 } from '../types';
 import IPv4Fields from './formInputs/IPv4Fields';
 import MACAddressInputField from './formInputs/MACAddressInputField';
-import NameInputField from './formInputs/NameInputField';
+import TextInputField from './formInputs/TextInputField';
 import { getInterfaceTypeLabel, newAddress } from './utils';
 
 const getIPv4InitialValues = (ipv4?: InterfaceIPv4Config): InterfaceIPv4Config => ({
@@ -109,7 +109,7 @@ function NMStateInterfaceDialog({
           <>
             <ModalBoxBody>
               <Form>
-                <NameInputField />
+                <TextInputField name="name" label="Name" isRequired />
                 <MACAddressInputField />
                 <IPv4Fields />
               </Form>
