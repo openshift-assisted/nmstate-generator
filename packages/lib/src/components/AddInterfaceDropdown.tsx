@@ -26,7 +26,6 @@ const dropdownItems = [
     key={NMStateInterfaceType.VLAN}
     component="button"
     componentID={NMStateInterfaceType.VLAN}
-    isDisabled
   >
     {getInterfaceTypeLabel(NMStateInterfaceType.VLAN)}
   </DropdownItem>,

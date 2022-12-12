@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Button,
   ButtonVariant,
@@ -12,9 +11,9 @@ import {
 } from '@patternfly/react-core';
 import PencilAltIcon from '@patternfly/react-icons/dist/esm/icons/pencil-alt-icon';
 import TrashIcon from '@patternfly/react-icons/dist/esm/icons/trash-icon';
+import React from 'react';
 import { NMStateInterface, NMStateInterfaceType } from '../types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEthernet } from '@fortawesome/free-solid-svg-icons';
+import InterfaceTypeIcon from './interfaceForms/InterfaceTypeIcon';
 import { getInterfaceTypeLabel } from './utils';
 
 type NMStateConfigInterfacesListProps = {
@@ -63,7 +62,7 @@ function NMStateConfigInterfacesList({
                     </CardActions>
                   )}
                   <CardTitle>
-                    <FontAwesomeIcon icon={faEthernet} />
+                    <InterfaceTypeIcon interfaceType={iface.type} />
                     &nbsp;{getInterfaceTypeLabel(iface.type as NMStateInterfaceType)}
                   </CardTitle>
                 </CardHeader>

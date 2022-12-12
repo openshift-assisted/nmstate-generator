@@ -56,7 +56,7 @@ export type NMStateInterface = {
   type: NMStateInterfaceType;
   state: InterfaceState;
   mtu?: number;
-  'mac-address': string;
+  'mac-address'?: string;
   description?: string;
   ipv4?: InterfaceIPv4Config;
   ipv6?: InterfaceIPv6Config;
@@ -68,4 +68,8 @@ export type NMStateConfig = {
     config: NMStateRoutesConfig[];
   };
   interfaces: NMStateInterface[];
+};
+
+export type EthernetInterface = NMStateInterface & {
+  'auto-negotiation': boolean;
 };
