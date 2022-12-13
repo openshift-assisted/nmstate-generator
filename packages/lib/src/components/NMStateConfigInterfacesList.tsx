@@ -3,7 +3,6 @@ import {
   ButtonVariant,
   Card,
   CardActions,
-  CardBody,
   CardHeader,
   CardTitle,
   Gallery,
@@ -12,9 +11,18 @@ import {
 import PencilAltIcon from '@patternfly/react-icons/dist/esm/icons/pencil-alt-icon';
 import TrashIcon from '@patternfly/react-icons/dist/esm/icons/trash-icon';
 import React from 'react';
-import { NMStateInterface, NMStateInterfaceType } from '../types';
-import InterfaceTypeIcon from './interfaceForms/InterfaceTypeIcon';
+import {
+  BondInterface,
+  EthernetInterface,
+  NMStateInterface,
+  NMStateInterfaceType,
+  VLANInterface,
+} from '../types';
+import BondInterfaceCardBody from './BondInterfaceCardBody';
+import EthernetInterfaceCardBody from './EthernetInterfaceCardBody';
+import InterfaceTypeIcon from './InterfaceTypeIcon';
 import { getInterfaceTypeLabel } from './utils';
+import VLANInterfaceCardBody from './VLANInterfaceCardBody';
 
 type NMStateConfigInterfacesListProps = {
   interfaces: (NMStateInterface | undefined)[];
@@ -66,34 +74,15 @@ function NMStateConfigInterfacesList({
                     &nbsp;{getInterfaceTypeLabel(iface.type as NMStateInterfaceType)}
                   </CardTitle>
                 </CardHeader>
-                <CardBody>
-                  Name: <strong>{iface.name}</strong>
-                  <br />
-                  MAC: <strong>{iface['mac-address']}</strong>
-                  {iface.ipv4?.enabled && (
-                    <>
-                      <br />
-                      IPv4:{' '}
-                      <strong>
-                        {iface.ipv4?.dhcp && 'DHCP'}
-                        {iface.ipv4?.address
-                          ?.map((a) => `${a.ip}/${a['prefix-length']}`)
-                          .join(', ')}
-                      </strong>
-                    </>
-                  )}
-                  {iface.ipv6?.enabled && (
-                    <>
-                      <br />
-                      IPv6:
-                      <strong>
-                        {iface.ipv6?.address
-                          ?.map((a) => `${a.ip}/${a['prefix-length']}`)
-                          .join(', ')}
-                      </strong>
-                    </>
-                  )}
-                </CardBody>
+                {iface.type === NMStateInterfaceType.ETHERNET && (
+                  <EthernetInterfaceCardBody interface={iface as EthernetInterface} />
+                )}
+                {iface.type === NMStateInterfaceType.VLAN && (
+                  <VLANInterfaceCardBody interface={iface as VLANInterface} />
+                )}
+                {iface.type === NMStateInterfaceType.BOND && (
+                  <BondInterfaceCardBody interface={iface as BondInterface} />
+                )}
               </Card>
             </GalleryItem>
           );

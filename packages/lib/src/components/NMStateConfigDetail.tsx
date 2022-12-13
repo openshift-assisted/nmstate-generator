@@ -48,6 +48,7 @@ function NMStateConfigDetail({ nmstateConfig, updateNMStateConfig }: NMStateConf
         <NMStateInterfaceDialog
           newInterfaceType={editInterface.type}
           nmstateInterface={nmstateConfig.interfaces[editInterface.index]}
+          interfaces={nmstateConfig.interfaces}
           addInterface={(nmstateInterface: NMStateInterface) =>
             updateNMStateConfig({
               ...nmstateConfig,

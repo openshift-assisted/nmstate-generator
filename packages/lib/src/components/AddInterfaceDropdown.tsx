@@ -33,7 +33,6 @@ const dropdownItems = [
     key={NMStateInterfaceType.BOND}
     component="button"
     componentID={NMStateInterfaceType.BOND}
-    isDisabled
   >
     {getInterfaceTypeLabel(NMStateInterfaceType.BOND)}
   </DropdownItem>,

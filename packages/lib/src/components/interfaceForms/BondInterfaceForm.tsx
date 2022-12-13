@@ -1,34 +1,42 @@
 import { Button, ButtonVariant, Form, ModalBoxBody, ModalBoxFooter } from '@patternfly/react-core';
 import { Formik, FormikConfig, FormikProps } from 'formik';
-import { InterfaceState, NMStateInterface, NMStateInterfaceType, VLANInterface } from '../../types';
+import {
+  InterfaceState,
+  NMStateInterface,
+  NMStateInterfaceType,
+  BondInterface,
+  BondMode,
+} from '../../types';
 import IPv4Fields from '../formInputs/IPv4Fields';
 import MACAddressInputField from '../formInputs/MACAddressInputField';
 import NumberInputField from '../formInputs/NumberInputField';
 import TextInputField from '../formInputs/TextInputField';
-import VLANBaseInterfaceSelectField from '../formInputs/VLANBaseInterfaceSelectField';
+import BondPortsMultiSelectField from '../formInputs/BondPortsMultiSelectField';
 import { NMStateInterfaceDialogProps } from '../NMStateInterfaceDialog';
 import { buildInterfaceIPv4Config, getIPv4InitialValues } from '../utils';
+import SelectField from '../formInputs/SelectField';
 
-export type VLANInterfaceFormValues = VLANInterface;
+export type BondInterfaceFormValues = Omit<BondInterface, 'mode'> & { mode: BondMode | '' };
 
-type VLANInterfaceFormProps = Omit<
+type BondInterfaceFormProps = Omit<
   NMStateInterfaceDialogProps,
   'newInterfaceType' | 'nmstateInterface'
 > & {
-  nmstateInterface?: VLANInterface;
+  nmstateInterface?: BondInterface;
   interfaces?: NMStateInterface[];
 };
 
-function VLANInterfaceForm({
+function BondInterfaceForm({
   nmstateInterface,
   interfaces,
   updateInterface,
   addInterface,
   onClose,
-}: VLANInterfaceFormProps) {
-  const handleSubmit: FormikConfig<VLANInterfaceFormValues>['onSubmit'] = (values) => {
-    const updatedInterface: VLANInterface = {
+}: BondInterfaceFormProps) {
+  const handleSubmit: FormikConfig<BondInterfaceFormValues>['onSubmit'] = (values) => {
+    const updatedInterface: BondInterface = {
       ...values,
+      mode: values.mode || BondMode.ROUND_ROBIN,
       ipv4: buildInterfaceIPv4Config(values.ipv4),
     };
 
@@ -41,27 +49,30 @@ function VLANInterfaceForm({
   };
 
   return (
-    <Formik<VLANInterfaceFormValues>
+    <Formik<BondInterfaceFormValues>
       initialValues={{
-        type: NMStateInterfaceType.VLAN,
+        type: NMStateInterfaceType.BOND,
         name: nmstateInterface?.name || '',
         state: InterfaceState.UP,
-        'mac-address': nmstateInterface?.['mac-address'] || '',
         ipv4: getIPv4InitialValues(nmstateInterface?.ipv4),
-        id: nmstateInterface?.id || 101,
-        'base-iface': nmstateInterface?.['base-iface'] || '',
+        mode: nmstateInterface?.mode || BondMode.ROUND_ROBIN,
+        options: nmstateInterface?.options || {},
+        ports: nmstateInterface?.ports || [],
       }}
       onSubmit={handleSubmit}
       validateOnMount
     >
-      {({ isSubmitting, isValid, submitForm }: FormikProps<VLANInterfaceFormValues>) => (
+      {({ isSubmitting, isValid, submitForm }: FormikProps<BondInterfaceFormValues>) => (
         <>
           <ModalBoxBody>
             <Form>
-              <VLANBaseInterfaceSelectField interfaces={interfaces} />
-              <NumberInputField name="id" label="VLAN ID" min={0} isRequired />
+              <SelectField
+                name="mode"
+                label="Bond mode"
+                options={Object.values(BondMode).map((value) => ({ value, label: value }))}
+              />
+              <BondPortsMultiSelectField interfaces={interfaces} />
               <TextInputField name="name" label="Name" isRequired />
-              {/* <MACAddressInputField /> */}
               <IPv4Fields />
             </Form>
           </ModalBoxBody>
@@ -79,4 +90,4 @@ function VLANInterfaceForm({
   );
 }
 
-export default VLANInterfaceForm;
+export default BondInterfaceForm;

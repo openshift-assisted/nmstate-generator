@@ -51,6 +51,16 @@ export enum InterfaceState {
   ABSENT = 'absent',
 }
 
+export enum BondMode {
+  ROUND_ROBIN = 'balance-rr',
+  ACTIVE_BACKUP = 'active-backup',
+  XOR = 'balance-xor',
+  BROADCAST = 'broadcast',
+  LACP = '802.3ad',
+  TLB = 'balance-tlb',
+  ALB = 'balance-alb',
+}
+
 export type NMStateInterface = {
   name: string;
   type: NMStateInterfaceType;
@@ -62,14 +72,27 @@ export type NMStateInterface = {
   ipv6?: InterfaceIPv6Config;
 };
 
+export type EthernetInterface = NMStateInterface & {
+  'auto-negotiation'?: boolean;
+  duplex?: 'full' | 'half';
+  speed?: number;
+};
+
+export type VLANInterface = NMStateInterface & {
+  id: number;
+  'base-iface': string;
+};
+
+export type BondInterface = NMStateInterface & {
+  mode?: BondMode;
+  options?: Record<string, unknown>;
+  ports: string[];
+};
+
 export type NMStateConfig = {
   'dns-resolver'?: NMStateDNSResolver;
   routes?: {
     config: NMStateRoutesConfig[];
   };
   interfaces: NMStateInterface[];
-};
-
-export type EthernetInterface = NMStateInterface & {
-  'auto-negotiation': boolean;
 };
