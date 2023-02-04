@@ -2,7 +2,6 @@ import { Button, ButtonVariant, Form, ModalBoxBody, ModalBoxFooter } from '@patt
 import { Formik, FormikConfig, FormikProps } from 'formik';
 import { InterfaceState, NMStateInterface, NMStateInterfaceType, VLANInterface } from '../../types';
 import IPv4Fields from '../formInputs/IPv4Fields';
-import MACAddressInputField from '../formInputs/MACAddressInputField';
 import NumberInputField from '../formInputs/NumberInputField';
 import TextInputField from '../formInputs/TextInputField';
 import VLANBaseInterfaceSelectField from '../formInputs/VLANBaseInterfaceSelectField';

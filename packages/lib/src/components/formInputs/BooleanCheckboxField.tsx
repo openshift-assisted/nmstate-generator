@@ -10,7 +10,7 @@ function BooleanCheckboxField({
   isRequired = false,
   children,
 }: BooleanCheckboxFieldProps) {
-  const [field, meta, helpers] = useField(name);
+  const [field, , helpers] = useField(name);
   const fieldId = `${name}-input-field`;
   return (
     <FormGroup fieldId={fieldId} isRequired>

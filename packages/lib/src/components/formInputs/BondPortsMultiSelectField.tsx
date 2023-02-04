@@ -15,7 +15,7 @@ type BondPortsMultiSelectFieldProps = {
 };
 function BondPortsMultiSelectField({ interfaces }: BondPortsMultiSelectFieldProps) {
   const [isExpanded, setIsExpanded] = React.useState(false);
-  const [field, meta, helpers] = useField<string[]>('ports');
+  const [field, , helpers] = useField<string[]>('ports');
   const fieldId = `${name}-input-field`;
 
   const options: SelectOptionProps[] = (interfaces || [])

@@ -1,4 +1,4 @@
-import { CodeEditor, CodeEditorProps, Language } from '@patternfly/react-code-editor';
+// import { CodeEditor, CodeEditorProps, Language } from '@patternfly/react-code-editor';
 import { ChangeHandler } from 'react-monaco-editor';
 import { NMStateConfig } from '../types';
 import { dump, load } from 'js-yaml';

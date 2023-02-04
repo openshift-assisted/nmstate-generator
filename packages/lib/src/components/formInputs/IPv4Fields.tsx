@@ -20,7 +20,7 @@ import NumberInputField from './NumberInputField';
 import TextInputField from './TextInputField';
 
 function IPv4Checkbox({ children }: { children: React.ReactNode }) {
-  const [field, meta, helpers] = useField('ipv4');
+  const [field, , helpers] = useField('ipv4');
   const fieldId = 'ipv4-input-field';
   return (
     <FormGroup fieldId={fieldId} isRequired>
@@ -38,7 +38,7 @@ function IPv4Checkbox({ children }: { children: React.ReactNode }) {
 }
 
 function DHCPRadioField() {
-  const [field, meta, helpers] = useField('ipv4.dhcp');
+  const [field, , helpers] = useField('ipv4.dhcp');
   const fieldId = 'ipv4-dhcp-input-field';
 
   const handleRadioChange: RadioProps['onChange'] = (checked, event) => {

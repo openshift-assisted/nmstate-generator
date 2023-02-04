@@ -12,7 +12,7 @@ type SelectFieldProps = BaseInputFieldProps & {
 };
 
 function SelectField({ name, label, isRequired = false, options }: SelectFieldProps) {
-  const [field, meta, helpers] = useField<string>(name);
+  const [field] = useField<string>(name);
   const fieldId = `${name}-input-field`;
   return (
     <FormGroup label={label} fieldId={fieldId} isRequired>

@@ -5,7 +5,7 @@ import { BaseInputFieldProps } from './types';
 type NumberInputFieldProps = BaseInputFieldProps & NumberInputProps;
 
 function NumberInputField({ name, label, isRequired = false, ...props }: NumberInputFieldProps) {
-  const [field, meta, helpers] = useField<number>(name);
+  const [field, , helpers] = useField<number>(name);
   const fieldId = `${name}-input-field`;
   const onPlus: NumberInputProps['onPlus'] = (event) => helpers.setValue(field.value + 1);
   const onMinus: NumberInputProps['onMinus'] = (event) => helpers.setValue(field.value - 1);

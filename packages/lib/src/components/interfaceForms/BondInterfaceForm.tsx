@@ -8,8 +8,6 @@ import {
   BondMode,
 } from '../../types';
 import IPv4Fields from '../formInputs/IPv4Fields';
-import MACAddressInputField from '../formInputs/MACAddressInputField';
-import NumberInputField from '../formInputs/NumberInputField';
 import TextInputField from '../formInputs/TextInputField';
 import BondPortsMultiSelectField from '../formInputs/BondPortsMultiSelectField';
 import { NMStateInterfaceDialogProps } from '../NMStateInterfaceDialog';
